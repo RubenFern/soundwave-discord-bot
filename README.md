@@ -1,62 +1,120 @@
-# SoundWave Musica Bot
+# 🎵 SoundWave Music Bot
 
 ## DESCRIPTION
 
-SoundWave is a YouTube audio playback bot in discord. SoundWave will join the voice channel you are in and play the content you have chosen, it allows you to play through a link to a Youtube video or playlist, or by a normal search.
+SoundWave is a modern, high-performance Discord music bot written in **Java** (using JDA and Lavaplayer). It joins your voice channel and plays high-quality audio from YouTube. It supports direct links, playlists, and text search.
 
-## INSTALATION
+This bot is containerized with **Docker**, making it extremely easy to install and run on any machine without worrying about Java versions or dependencies.
 
-In order to install SoundWave on your Discord server you will need to download/install the following:
+## 📋 PREREQUISITES
 
-* **NodeJS:** If you want to run the bot on your computer without the need to have a server to host the bot you must install NodeJS from its [official web site](https://nodejs.org/es).
+To run SoundWave, you only need one thing installed on your computer or server:
 
-* **Source code:** You must download the source code of the bot, to do so you can run 
+* **[Docker Desktop](https://www.docker.com/products/docker-desktop/)** (Windows/Mac) or **Docker Engine** (Linux).
+* **Git** (Optional, to clone the repo).
 
-```sh
-git fork https://github.com/RubenFern/SoundWave-Bot-Discord.git
-```
+*You do NOT need to install Java or Maven manually; Docker handles all of that.*
 
-Or, if you don't have Git, download it directly from the ***Code*** - ***Download ZIP*** button. 
+## 🚀 INSTALLATION & SETUP
 
-* **Discord application:** You must create your Discord application, here is a link to a page where it explains how [Tutorial](https://www.ionos.es/digitalguide/servidores/know-how/discord-bot/#:~:text=Create%20a%20bot%20of%20your%20own%20in%20Discord%3A&text=Click%20on%20%20E2%80%9CApplications%E2%80%9D%20in,bot%20and%20save%20the%20file).
+Follow these steps to get your bot running in minutes:
 
-## CONFIGURATION
+### 1\. Clone the repository
 
-For the bot to work you must:
-
-1. Rename the file ```config.json.example``` to ```config.json```.
-
-2. Fill in the fields it has inside:
-
-* token: It is the token you generate when you create your application at (https://discord.com/developers/applications).
-* clientId: It is the ID of the bot. You can access it from (https://discord.com/developers/applications) after creating the application.
-* guildId: It is the ID of the server where the Bot is going to be installed.
-* API_KEY: This is the Youtube Data API v3 API key. You can create one at (https://console.cloud.google.com).
-
-## EXECUTE
-
-To execute it, all you have to do is open a console terminal, go to the project directory and execute.
+Open your terminal and run:
 
 ```sh
-node index.js
+git clone https://github.com/RubenFern/SoundWave-Bot-Discord.git
+cd SoundWave-Bot-Discord
 ```
 
-To end the execution you can press ***Ctrl + C***.
+*(Or download the ZIP from the "Code" button if you don't have Git).*
 
-## COMMANDS
+### 2\. Configure the Environment
 
-The commands available to the Bot are:
+The bot needs your Discord secrets to work.
 
-* **/play**: You can play songs or videos (audio only) from Youtube. To do this you must execute. 
+1.  Locate the file named `.env.example`.
+2.  Rename it to `.env` (or copy it).
+3.  Open `.env` with a text editor and fill in your data:
+
+<!-- end list -->
+
+```ini
+# .env file configuration
+
+# Your Bot Token (Get it from Discord Developer Portal)
+DISCORD_TOKEN=your_token_here_example_xyz
+
+# The ID of the server where you are testing the bot
+# (Required to register Slash Commands instantly)
+GUILD_ID=123456789012345678
+```
+
+> **How to get the GUILD\_ID?**
+> Enable "Developer Mode" in Discord Settings \> Advanced. Then, right-click on your server name (on the left sidebar) and click **"Copy Server ID"**.
+
+## ▶️ EXECUTE WITH DOCKER
+
+Once configured, you can start the bot with a single command. It will automatically compile the Java code and start the application.
+
+### Start the Bot
 
 ```sh
-/play [link_video]/[link_playlist]/[search_by_text]
+docker-compose up -d
 ```
 
-* **/stop**: You can stop the entire playback of the ones you are listening to.
+* The `-d` flag runs the bot in the background (detached mode).
+* *Note: The first time you run this, it may take a few minutes to download dependencies and compile.*
 
-* **/next**: You can skip to the next song (if it exists).
+### Check Logs
 
-* **/pause**: You can pause the song you are listening to.
+To see what the bot is doing or check for errors:
 
-* **/continue**: You can continue playing what you were listening to.
+```sh
+docker-compose logs -f
+```
+
+### Stop the Bot
+
+To stop the execution:
+
+```sh
+docker-compose down
+```
+
+-----
+
+## 🛠️ COMMANDS
+
+The bot uses Discord **Slash Commands (/)**. Type `/` in your chat to see the menu.
+
+| Command | Description |
+| :--- | :--- |
+| **/play** `query` | Plays audio from YouTube. You can use a **URL** or a **search term**. |
+| **/skip** | Skips the current track and plays the next one in the queue. |
+| **/stop** | Stops playback, clears the queue, and disconnects the bot. |
+
+*(Note: If you don't see the commands immediately, try reinviting the bot or waiting a few minutes for Discord to refresh).*
+
+-----
+
+## 🔧 DEVELOPMENT (Optional)
+
+If you want to run the bot locally without Docker (for development purposes), you will need:
+
+* **Java JDK 21** or higher.
+* **Maven** installed.
+
+**Run command:**
+
+```sh
+mvn clean package
+java -jar target/SoundWave.jar
+```
+
+-----
+
+## 📄 LICENSE
+
+This project is licensed under the MIT License - see the LICENSE file for details.
