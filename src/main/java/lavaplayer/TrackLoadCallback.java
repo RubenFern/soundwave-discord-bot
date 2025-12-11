@@ -28,12 +28,18 @@ public class TrackLoadCallback implements AudioLoadResultHandler {
         event.getHook().sendMessage("❌ No se ha podido cargar la pista: `" + exception.getMessage() + "`").queue();
     }
 
+    /**
+     * Called when a single track has been loaded.
+     */
     @Override
     public void trackLoaded(AudioTrack track) {
         musicManager.scheduler.queue(track);
         event.getHook().sendMessage("▶️ Añadido: `" + track.getInfo().title + "`").queue();
     }
 
+    /**
+     * Called when a playlist has been loaded.
+     */
     @Override
     public void playlistLoaded(AudioPlaylist playlist) {
         if (trackIdentifier.startsWith("ytsearch:")) {

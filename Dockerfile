@@ -7,9 +7,14 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # --- Runtime ---
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-RUN apk add --no-cache fontconfig ttf-dejavu
+RUN apt-get update && apt-get install -y \
+    libopus-dev \
+    libsodium-dev \
+    fontconfig \
+    libfreetype6 \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=build /app/target/SoundWave.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-jar", "app.jar"]
