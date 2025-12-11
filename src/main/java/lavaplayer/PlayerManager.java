@@ -22,7 +22,11 @@ public class PlayerManager {
         playerManager.getConfiguration().setFrameBufferFactory(NonAllocatingAudioFrameBuffer::new);
         playerManager.getConfiguration().setResamplingQuality(AudioConfiguration.ResamplingQuality.MEDIUM);
 
-        playerManager.registerSourceManager(new YoutubeAudioSourceManager());
+        YoutubeAudioSourceManager youtube = new YoutubeAudioSourceManager();
+
+        youtube.useOauth2(null, true);
+
+        playerManager.registerSourceManager(youtube);
     }
 
     public static synchronized PlayerManager getInstance() {

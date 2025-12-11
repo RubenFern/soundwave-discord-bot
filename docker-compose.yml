@@ -12,3 +12,5 @@ services:
         limits:
           cpus: '1.0'
           memory: 1G
+    volumes:
+      - ./youtube-data:/app/youtube-data
