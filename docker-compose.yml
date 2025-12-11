@@ -1,0 +1,13 @@
+name: soundwave-discord-music-bot
+
+services:
+  discord-bot:
+    container_name: soundwave-discord-music-bot
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 1G
