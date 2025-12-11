@@ -1,5 +1,5 @@
-import commands.CommandRegistry;
-import commands.Commands;
+import core.CommandRegistry;
+import core.Commands;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -52,6 +52,21 @@ public class MusicBot {
                 .queue();
 
         guild.upsertCommand(Commands.STOP.getName(), "Detiene la reproducción y limpia la cola")
+                .queue();
+
+        guild.upsertCommand(Commands.PAUSE.getName(), "Pausa la canción actual temporalmente")
+                .queue();
+
+        guild.upsertCommand(Commands.CONTINUE.getName(), "Reanuda la música si estaba pausada")
+                .queue();
+
+        guild.upsertCommand(Commands.QUEUE.getName(), "Muestra la lista de canciones pendientes")
+                .queue();
+
+        guild.upsertCommand(Commands.NOW_PLAYING.getName(), "Muestra la canción que está sonando y su progreso")
+                .queue();
+
+        guild.upsertCommand(Commands.HELP.getName(), "Muestra la lista de comandos y ayuda")
                 .queue();
     }
 

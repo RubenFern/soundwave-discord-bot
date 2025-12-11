@@ -3,15 +3,15 @@ package commands;
 import core.Action;
 import core.Commands;
 
-public class PlayCommand extends AbstractCommand {
+public class ContinueCommand extends AbstractCommand {
 
-    public PlayCommand(Action action) {
+    public ContinueCommand(Action action) {
         super(action);
     }
 
     @Override
     public String getName() {
-        return Commands.PLAY.getName();
+        return Commands.CONTINUE.getName();
     }
 
 }

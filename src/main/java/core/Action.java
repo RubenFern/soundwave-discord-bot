@@ -1,6 +1,4 @@
-package actions;
-
-import commands.CommandContext;
+package core;
 
 public interface Action {
 

@@ -1,6 +1,6 @@
 package actions;
 
-import commands.CommandContext;
+import core.CommandContext;
 import lavaplayer.GuildMusicManager;
 import lavaplayer.PlayerManager;
 import lavaplayer.TrackLoadCallback;
@@ -10,8 +10,10 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 
+import java.util.Objects;
+
 @Slf4j
-public class PlayAction implements Action {
+public class PlayAction extends AbstractAction {
 
     @Override
     public void action(CommandContext context, String[] args) {
@@ -23,22 +25,16 @@ public class PlayAction implements Action {
         }
 
         String query = args[0];
-        Guild guild = event.getGuild();
-        Member member = event.getMember();
-
-        if (guild == null || member == null || member.getVoiceState() == null || !member.getVoiceState().inAudioChannel()) {
-            event.reply("Debes estar en un canal de voz para reproducir música.").setEphemeral(true).queue();
-            return;
-        }
-
-        AudioChannel audioChannel = member.getVoiceState().getChannel();
+        Guild guild = getGuild(context);
+        Member member = getMember(context);
+        AudioChannel audioChannel = Objects.requireNonNull(member.getVoiceState()).getChannel();
 
         if (audioChannel == null) {
             event.reply("No se pudo obtener el canal de voz.").setEphemeral(true).queue();
             return;
         }
 
-        AudioManager audioManager = guild.getAudioManager();
+        AudioManager audioManager = getAudioManager(context);
 
         PlayerManager playerManager = PlayerManager.getInstance();
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(guild.getIdLong());

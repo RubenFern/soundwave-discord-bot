@@ -1,4 +1,4 @@
-package commands;
+package core;
 
 import lombok.Getter;
 
@@ -7,6 +7,7 @@ public enum Commands {
 
     PLAY("play"),
     PAUSE("pause"),
+    CONTINUE("continue"),
     STOP("stop"),
     SKIP("skip"),
     QUEUE("queue"),

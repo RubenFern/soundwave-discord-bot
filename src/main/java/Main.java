@@ -1,6 +1,6 @@
-import actions.PlayAction;
-import commands.CommandRegistry;
-import commands.PlayCommand;
+import actions.*;
+import commands.*;
+import core.CommandRegistry;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,7 +8,15 @@ public class Main {
             System.out.println("--- Iniciando SoundWave Bot ---");
 
             CommandRegistry commandRegistry = new CommandRegistry();
+
             commandRegistry.register(new PlayCommand(new PlayAction()));
+            commandRegistry.register(new StopCommand(new StopAction()));
+            commandRegistry.register(new PauseCommand(new PauseAction()));
+            commandRegistry.register(new ContinueCommand(new ContinueAction()));
+            commandRegistry.register(new SkipCommand(new SkipAction()));
+            commandRegistry.register(new NowPlayingCommand(new NowPlayingAction()));
+            commandRegistry.register(new QueueCommand(new QueueAction()));
+            commandRegistry.register(new HelpCommand(new HelpAction()));
 
             new MusicBot(commandRegistry).start();
 
