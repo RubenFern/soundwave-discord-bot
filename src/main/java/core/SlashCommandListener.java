@@ -1,7 +1,5 @@
-import core.Command;
-import core.CommandContext;
-import core.CommandRegistry;
-import core.Commands;
+package core;
+
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;

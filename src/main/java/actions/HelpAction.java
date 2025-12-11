@@ -15,7 +15,11 @@ public class HelpAction extends AbstractAction {
         EmbedBuilder embed = new EmbedBuilder();
 
         embed.setTitle("🎶 SoundWave - Ayuda y Comandos");
-        embed.setDescription("Aquí tienes la lista de comandos disponibles para controlar la música:");
+        String repoUrl = "https://github.com/RubenFern/soundwave-discord-bot";
+        String description = "Aquí tienes la lista de comandos disponibles.\n\n" +
+                "⭐ **Si te gusta este bot, [dale una estrella en GitHub](" + repoUrl + ")**";
+
+        embed.setDescription(description);
         embed.setColor(Color.decode("#5865F2"));
         embed.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
 
@@ -40,7 +44,7 @@ public class HelpAction extends AbstractAction {
         embed.addField("/" + Commands.NOW_PLAYING.getName(),
                 "Muestra información de la canción actual.", true);
 
-        embed.setFooter("SoundWave Bot • Hecho con Java y JDA", event.getJDA().getSelfUser().getAvatarUrl());
+        embed.setFooter("SoundWave Bot • Hecho con Java", event.getJDA().getSelfUser().getAvatarUrl());
 
         event.replyEmbeds(embed.build()).queue();
     }

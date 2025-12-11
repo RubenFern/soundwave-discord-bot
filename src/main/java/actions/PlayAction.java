@@ -34,7 +34,7 @@ public class PlayAction extends AbstractAction {
             return;
         }
 
-        AudioManager audioManager = getAudioManager(context);
+        AudioManager audioManager = guild.getAudioManager();
 
         PlayerManager playerManager = PlayerManager.getInstance();
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(guild.getIdLong());

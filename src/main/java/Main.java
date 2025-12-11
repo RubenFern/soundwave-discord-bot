@@ -1,6 +1,7 @@
 import actions.*;
 import commands.*;
 import core.CommandRegistry;
+import core.MusicBot;
 
 public class Main {
     public static void main(String[] args) {
